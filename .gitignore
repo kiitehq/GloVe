@@ -37,3 +37,8 @@ build/*
 
 # OS X stuff
 ._*
+
+# other files
+combined_embeddings.txt
+combined_embeddings_formatted.txt
+glove.840B.300d.txt

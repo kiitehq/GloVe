@@ -4,8 +4,6 @@ import argparse
 import subprocess
 import os
 
-os.chdir("/Users/mandygu/Desktop/GloVe/")
-
 # Preprocessing function which removes non-alphabetical words and tokenizes
 def preproc(path):
     print("Preprocessing vocab ... ")
@@ -76,8 +74,8 @@ def remove():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--file', type=str, default="custom_vocab.txt", help='name of vocabulary file')
-    parser.add_argument('--refine', type = bool, default = True, help = 'do you want to merge with pretrained embeddings? If True, specify')
+    parser.add_argument('--file', type=str, default=None, help='name of vocabulary file')
+    parser.add_argument('--refine', type = bool, default = True, help = 'do you want to merge with pretrained embeddings? If True, specify filename with --merge')
     parser.add_argument('--merge', type = str, default = "glove.840B.300d.txt", help = 'filename of additional embeddings')
     args = parser.parse_args()
 
@@ -94,12 +92,6 @@ remove()
 #  Testing Embeddings
 # -------------------
 
-'''
-
-Testing: 
-
-model.most_similar(positive=None, negative=None, topn=10, restrict_vocab=None, indexer=None) gives the topn most similar words 
-model.similarity(w1 = "word 1", w2 = "word 2") returns the cosine similarity between the two words 
 
 '''
 
@@ -109,3 +101,8 @@ from gensim.scripts.glove2word2vec import glove2word2vec
 glove2word2vec("combined_embeddings.txt", "combined_embeddings_formatted.txt")
 model = KeyedVectors.load_word2vec_format("combined_embeddings_formatted.txt", binary=False)
 
+
+# model.most_similar(positive=None, negative=None, topn=10, restrict_vocab=None, indexer=None) gives the topn most similar words 
+# model.similarity(w1 = "word 1", w2 = "word 2") returns the cosine similarity between the two words 
+
+'''
