@@ -12,7 +12,7 @@ def preproc(path):
     word = word.lower()
     word = re.sub('\[[^\]]*\]','',word)                             # removing footnotes (applicable for wikipedia articles) 
     tokens = nltk.word_tokenize(word)
-    tokens = [x for x in tokens if x.isalpha()]
+    tokens = [x for x in tokens if x.isdigit() == False]
     tokens = " ".join(tokens)
     with open("preprocessed_vocab.txt", "w") as text_file:
         text_file.write(tokens)
@@ -48,9 +48,7 @@ def merge(originalEmbeddings):
 
     for i in original:                              # iterate through the original vocabulary 
         lst = i.split(" ")
-        if lst[0].isalpha() == False:               # keep only tokens that are alphabetical      
-            continue
-        elif lst[0].lower() in vocab.keys():        # if the token is also present in the new vocabulary, append vector from new vocabulary after vector from original vocabulary
+        if lst[0].lower() in vocab.keys():        # if the token is also present in the new vocabulary, append vector from new vocabulary after vector from original vocabulary
             lst[-1] = lst[-1][:-1]  
             lst = lst + vocab[lst[0].lower()]
             newEmbeddings.append(" ".join(lst))
@@ -89,7 +87,7 @@ if args.refine:
 
 remove() 
 
-print("Finished. New embeddings in file combined_embeddings.txt")
+print("Finished. New embeddings in combined_embeddings.txt")
 
 # -------------------
 #  Testing Embeddings
@@ -97,6 +95,9 @@ print("Finished. New embeddings in file combined_embeddings.txt")
 
 
 '''
+
+# NOTE: gensim does not compile non-alphabetical embeddings (i.e. for symbols).
+# Need to remove non-alphabetical tokens to test the embeddings with gensim  
 
 from gensim.models.keyedvectors import KeyedVectors
 from gensim.scripts.glove2word2vec import glove2word2vec
