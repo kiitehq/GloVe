@@ -22,6 +22,7 @@ def preproc(path):
 
 def call(): 
     print("Building embeddings ...")
+    subprocess.call(['make'])
     subprocess.call(['./demo.sh'])
 
 # Merge custom embeddings with pre-trained embeddings by concatenating the new vector after the vector of the pretrained embeddings 
@@ -87,6 +88,8 @@ if args.refine:
     merge(args.merge)
 
 remove() 
+
+print("Finished. New embeddings in file combined_embeddings.txt")
 
 # -------------------
 #  Testing Embeddings
