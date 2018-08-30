@@ -1,3 +1,12 @@
+## Unofficial Additions
+
+Added script to create and fine tune pre-trained GloVe embeddings with custom document. 
+
+Run `python customEmbeddings.py --file myCustomDocument.txt --merge pretrainedEmbeddings.txt`
+
+where `myCustomDocument.txt` is the custom document in its original form and `pretrainedEmbeddings.txt` is the pre-trained GloVe embeddings (could be downloaded using links below). 
+The script will create GloVe embeddings for the custom document and concatenate the vectors to those created using the pre-trained embeddings. 
+
 ## GloVe: Global Vectors for Word Representation
 
 
